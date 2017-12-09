@@ -3,7 +3,9 @@ package manager;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -38,6 +40,7 @@ public class ManagerBean implements Serializable {
 	}
 
 	public List<Produto> getProdutos() {
+		produtos = produtoDao.findAll();
 		return produtos;
 	}
 
@@ -77,4 +80,15 @@ public class ManagerBean implements Serializable {
 		this.produtoDao = produtoDao;
 	}
 
+	public void gravar() {
+
+		FacesContext fc = FacesContext.getCurrentInstance();
+		try {
+			produtoDao.create(produto);
+			produto = new Produto();
+			fc.addMessage(null, new FacesMessage("Dados Gravados..."));
+		} catch (Exception ex) {
+			fc.addMessage(null, new FacesMessage("Error : " + ex.getMessage()));
+		}
+	}
 }

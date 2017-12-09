@@ -32,7 +32,7 @@ public class ProdutoDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Produto> findAll() throws Exception {
+	public List<Produto> findAll() {
 		return hibernate.loadAll(Produto.class);
 	}
 
