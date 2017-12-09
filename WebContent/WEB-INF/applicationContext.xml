@@ -44,7 +44,7 @@
 		destroy-method="close">
 
  <property name="driverClassName" 	value="com.mysql.jdbc.Driver" />
- <property name="url" value="jdbc:mysql://localhost:3306/dart1" />
+ <property name="url" value="jdbc:mysql://localhost:3306/bd15" />
  <property name="username" value="root" />
  <property name="password" value="coti" />
 
