@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <sec:http 	auto-config="true" 
+    			access-denied-page="/sistema.jsf" >		
+		
+<sec:intercept-url pattern="/admin/*" 		access="ROLE_ADM"/>
+<sec:intercept-url pattern="/sistema.jsf" 	access="ROLE_USU,ROLE_ADM"/>
+	
+<sec:form-login login-page="/login.jsf"
+		 		authentication-failure-url="/login.jsf?erro=true"
+		 		default-target-url="/admin/home.jsf" />
+
+<sec:logout logout-success-url="/login.jsf"
+		 	delete-cookies="true"
+		 	invalidate-session="true"/>
+		
+	</sec:http>
+ 
+		<sec:authentication-manager>	
+
+		<sec:authentication-provider>
+	    <sec:password-encoder hash="sha" /> 
+ 		 
+ 		<sec:jdbc-user-service data-source-ref="ds"
+	 users-by-username-query=
+	 "select login, senha, 1 from usuario where  login=?"
+	 authorities-by-username-query=
+"select login, perfil from usuario where login=? and ativo=1"
+	 /> 				
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	 
+	 <!-- SPRING DATA -->
+	<bean id="ds" 
+	class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+
+ <property name="driverClassName" 	value="com.mysql.jdbc.Driver" />
+ <property name="url" value="jdbc:mysql://localhost:3306/dart1" />
+ <property name="username" value="root" />
+ <property name="password" value="coti" />
+
+	</bean>
+
+
+	<bean id="sf"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="ds" />
+
+		<property name="annotatedClasses">
+			<list>
+				<value>entity.Usuario</value>
+				<value>entity.Produto</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				  <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				 <prop key="hibernate.show_sql">true</prop>
+				 <prop key="hibernate.format_sql">true</prop>
+				 <prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="usuarioDaoSpring" class="persistence.UsuarioDao">
+		<property name="sessionFactory" ref="sf"/>
+	</bean>
+	
+	<bean id="produtoDaoSpring" class="persistence.ProdutoDao">
+		<property name="sessionFactory" ref="sf"/>
+	</bean>
+	
+	
+</beans>
+
