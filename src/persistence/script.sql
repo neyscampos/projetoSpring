@@ -13,7 +13,7 @@ insert into usuario values (null, 'carlos', 'carlos@gmail.com', sha1('123'),'ROL
 insert into usuario values (null, 'monster', 'monster@gmail.com', sha1('123'),'ROLE_USU',1);
 insert into usuario values (null, 'lu', 'lu@gmail.com', sha1('123'),'ROLE_USU',1);
 insert into usuario values (null, 'bira', 'bira@gmail.com', sha1('123'),'ROLE_USU',1);
-
+insert into usuario values (null, 'ney', 'ney@gmail.com', sha1('123'),'ROLE_ADM',1);
 commit;
 
 select * from usuario;

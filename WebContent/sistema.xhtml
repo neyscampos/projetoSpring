@@ -1,20 +1,19 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p=""
-	xmlns:h=""
-	xmlns:f="">
-
-<h:head>
-</h:head>
-<h:body onload="acesso.show()">
-	<p:panel header="Area do Usuario : #{mb.usuarioLogado.nome}">
-		<form method="post" action="j_spring_security_logout">
-			<h:commandButton value="Sair"></h:commandButton>		
-		</form>
-		<br/>
-		<h:outputText value="Acesso como usuário"/>
-	</p:panel>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+  <h:head>
+ </h:head>
+ <h:body>
+    <p:panel header="Area do Usuario :  #{mb.usuarioLogado.nome}">
+       <form method="post" action="../j_spring_security_logout">
+          <h:commandButton value="sair"></h:commandButton>   
+       </form>
+       <br/>
+       <h:outputText value="Acesso Como Usuario"   />
+    </p:panel>    
 </h:body>
 </html>

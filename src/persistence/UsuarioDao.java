@@ -1,5 +1,6 @@
 package persistence;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -7,7 +8,9 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import entity.Usuario;
 
-public class UsuarioDao {
+public class UsuarioDao  implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private HibernateTemplate hibernate;
 	

@@ -1,28 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p=""
-	xmlns:h=""
-	xmlns:f="">
-
-<h:head>
-	<style type="text/css">
-		.ui-width{font-size:16pt;font-color:#00F};
-	</style>
-</h:head>
-<h:body onload="acesso.show()">
-	<p:dialog header="Controle Login" widgetVar="acesso" closable="false" modal="true" resizable="false">
-		<p:outputLable value="Login inválido" rendered="#{param.erro}" style="color:red"></p:outputLable>
-		<form method="post" action="j_spring_security_check">
-			<h:panelGrid columns="2">
-				<h:outputText value="usuario"/>
-				<h:inputText id="j_username" required="true"></h:inputText>
-				<h:outputText value="senha"/>
-				<h:inputSecret id="j_password" required="true"></h:inputSecret>
-			</h:panelGrid>
-			 <h:commandButton value="Entrar"></h:commandButton>
-		</form>
-	</p:dialog>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+>
+  <h:head>
+  <style type="text/css">
+      .ui-width{font-size:16pt; font-color:#00F};
+  </style>
+ </h:head>
+ <h:body onload="acesso.show()">
+    <p:dialog  header="Controle Login"  widgetVar="acesso"
+      closable="false" modal="true" resizable="false">
+                 <p:outputLabel value="Login Invalido" rendered="#{param.erro}"
+                    style="color:red"></p:outputLabel>    
+         <form method="post" action="j_spring_security_check">
+             <h:panelGrid columns="2">
+                <h:outputText value="usuario" />
+                <h:inputText id="j_username" required="true"></h:inputText>
+                <h:outputText value="senha" />
+                <h:inputSecret id="j_password" required="true"></h:inputSecret>
+              </h:panelGrid>
+              <h:commandButton value="Entrar"></h:commandButton>
+         </form>
+      </p:dialog> 
 </h:body>
 </html>
