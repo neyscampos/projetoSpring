@@ -34,7 +34,6 @@ public class ProdutoDao  implements Serializable {
 		return (Produto) hibernate.get(Produto.class, cod);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Produto> findAll() {
 		return hibernate.loadAll(Produto.class);
 	}

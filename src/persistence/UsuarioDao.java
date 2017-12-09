@@ -35,7 +35,6 @@ public class UsuarioDao  implements Serializable {
 		return (Usuario) hibernate.get(Usuario.class, cod);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Usuario> findAll() throws Exception {
 		return hibernate.loadAll(Usuario.class);
 	}

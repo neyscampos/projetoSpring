@@ -18,29 +18,54 @@ import persistence.ProdutoDao;
 import persistence.UsuarioDao;
 
 public class ManagerBean implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@ManagedProperty("#{usuarioDaoSpring}")
-	private UsuarioDao usuarioDao;
+	private UsuarioDao usuariodao;
 
 	@ManagedProperty("#{produtoDaoSpring}")
-	private ProdutoDao produtoDao;
+	private ProdutoDao produtodao;
 
 	private List<Produto> produtos;
 
-	private Usuario usuarioLogado;
+	private Usuario logado;
 	private Produto produto;
 
 	public ManagerBean() {
-		usuarioLogado = new Usuario();
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication autenticacao = context.getAuthentication();
-		usuarioLogado.setNome(((User) autenticacao.getPrincipal()).getUsername());
+		logado = new Usuario();
+		  SecurityContext context = SecurityContextHolder.getContext();
+		 Authentication userLogado = context.getAuthentication();
+		logado.setNome( 
+				                       ((User)  userLogado.getPrincipal()).getUsername()
+		                       );
+      	}
+
+	
+	
+	
+	
+	public UsuarioDao getUsuariodao() {
+		return usuariodao;
+	}
+
+	public void setUsuariodao(UsuarioDao usuariodao) {
+		this.usuariodao = usuariodao;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public ProdutoDao getProdutodao() {
+		return produtodao;
+	}
+
+	public void setProdutodao(ProdutoDao produtodao) {
+		this.produtodao = produtodao;
 	}
 
 	public List<Produto> getProdutos() {
-		produtos = produtoDao.findAll();
+		produtos = produtodao.findAll();
 		return produtos;
 	}
 
@@ -48,12 +73,13 @@ public class ManagerBean implements Serializable {
 		this.produtos = produtos;
 	}
 
-	public Usuario getUsuario() {
-		return usuarioLogado;
+	public Usuario getLogado() {
+		return logado;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuarioLogado = usuario;
+
+	public void setLogado(Usuario logado) {
+		this.logado = logado;
 	}
 
 	public Produto getProduto() {
@@ -63,32 +89,17 @@ public class ManagerBean implements Serializable {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-
-	public UsuarioDao getUsuarioDao() {
-		return usuarioDao;
-	}
-
-	public void setUsuarioDao(UsuarioDao usuarioDao) {
-		this.usuarioDao = usuarioDao;
-	}
-
-	public ProdutoDao getProdutoDao() {
-		return produtoDao;
-	}
-
-	public void setProdutoDao(ProdutoDao produtoDao) {
-		this.produtoDao = produtoDao;
-	}
-
-	public void gravar() {
-
+	
+	public void gravar(){
 		FacesContext fc = FacesContext.getCurrentInstance();
-		try {
-			produtoDao.create(produto);
+		
+		try{
+			produtodao.create(produto);
 			produto = new Produto();
-			fc.addMessage(null, new FacesMessage("Dados Gravados..."));
-		} catch (Exception ex) {
-			fc.addMessage(null, new FacesMessage("Error : " + ex.getMessage()));
+			fc.addMessage(null, new FacesMessage ("Dados Gravados Produto..."));
+		}catch(Exception ex){
+			fc.addMessage(null, new FacesMessage ("Error:" + ex.getMessage()));
+
 		}
 	}
 }

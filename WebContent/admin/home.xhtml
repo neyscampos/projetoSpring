@@ -1,39 +1,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
-
-<h:head>
-</h:head>
-<h:body onload="acesso.show()">
-	<p:panel header="Area do Administrador : #{mb.usuarioLogado.nome}">
-		<form method="post" action="../j_spring_security_logout">
-			<h:commandButton value="Sair"></h:commandButton>		
-		</form>
-		<br/>
-		<h:outputText value="Acesso como administrador"/>
-	</p:panel>
-	
-	
-	<p:panel header="Acessar produto">
-		<p:dataTable value="#{mb.produtos}" var="produto" rows="3" paginator="true">
-			<p:column headerText="idProduto">
-				<h:outputText value="#{linha.idProduto}"/>
-			</p:column>
-			<p:column headerText="idProduto">
-				<h:outputText value="#{linha.idProduto}"/>
-			</p:column>		
-			<p:column headerText="Nome">
-				<h:outputText value="#{linha.nomeProduto}"/>
-			</p:column>				
-			<p:column headerText="Preço">
-				<h:outputText value="#{linha.preco}"/>
-			</p:column>		
-		
-		</p:dataTable>
-	</p:panel>
+	xmlns:f="http://java.sun.com/jsf/core"
+>
+  <h:head>
+ </h:head>
+ <h:body>
+    <p:panel header="Area do Administrador :  #{mb.logado.nome}">
+       <form method="post" action="../j_spring_security_logout">
+          <h:commandButton value="sair"></h:commandButton>   
+       </form>
+       <br/>
+       <h:outputText value="Acesso Como Administrador"   />
+    </p:panel>    
+    
+    <p:panel header="Acessar Produto">
+      <p:dataTable value="#{mb.produtos}" var="linha" 
+       rows="3" paginator="true">
+       
+        <p:column headerText="idProduto">
+          <h:outputText value="#{linha.idProduto}" />
+        </p:column>
+        
+       <p:column headerText="Nome">
+          <h:outputText value="#{linha.nomeProduto}" />
+        </p:column>
+        
+       <p:column headerText="Preco">
+          <h:outputText value="#{linha.preco}" />
+        </p:column>
+    </p:dataTable>
+     
+  </p:panel>
+    
+    
 </h:body>
 </html>
